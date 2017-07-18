@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Leonid Shatkhin</authors>
+    <owners>$autor$</owners>
+    <projectUrl>https://github.com/Lenny0365/NlogViewer</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package description</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>NLog windows Control</tags>
+    <dependencies>
+      <dependency id="NLog" version="4.4.11" />
+    </dependencies>
+  </metadata>
+</package>
