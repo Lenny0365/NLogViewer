@@ -5,15 +5,21 @@
     <version>$version$</version>
     <title>$title$</title>
     <authors>Leonid Shatkhin</authors>
-    <owners>$autor$</owners>
-    <projectUrl>https://github.com/Lenny0365/NlogViewer</projectUrl>
+    <owners>$author$</owners>
+    <projectUrl>>https://github.com/lenny0365/NlogViewer</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Package description</description>
-    <releaseNotes></releaseNotes>
+    <description>$description$</description>
+    <releaseNotes>Added functionality log based on logger name.</releaseNotes>
     <copyright>Copyright 2017</copyright>
-    <tags>NLog windows Control</tags>
+    <tags>NLog Wonidows Control</tags>
     <dependencies>
       <dependency id="NLog" version="4.4.11" />
     </dependencies>
   </metadata>
+  <files>
+    <!-- Include everything in \build -->
+    <file src="build\**" target="build" />
+    <file src="NuGet\tools\*.*" target="tools" />
+    <file src="NuGet\content\*.*" target="content" />
+  </files>
 </package>

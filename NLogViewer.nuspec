@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Package</id>
+    <id>NLogViewer</id>
     <version>1.0.0</version>
     <authors>leonid.shatkhin</authors>
     <owners>leonid.shatkhin</owners>
