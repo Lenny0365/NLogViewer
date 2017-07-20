@@ -18,8 +18,8 @@
   </metadata>
   <files>
     <!-- Include everything in \build -->
-    <file src="build\**" target="build" />
-    <file src="NuGet\tools\*.*" target="tools" />
-    <file src="NuGet\content\*.*" target="content" />
+    <file src="bin\*.*" target="lib" />
+    <file src="NuGet\tools\*.*" target="lib\tools" />
+    <file src="NuGet\content\*.*" target="lib\content" />
   </files>
 </package>
