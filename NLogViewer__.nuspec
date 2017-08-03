@@ -18,7 +18,7 @@
   </metadata>
   <files>
     <!-- Include everything in \build -->
-    <!--<file src="NuGet\tools\*.*" target="tools" />-->
+    <file src="NuGet\tools\*.*" target="tools" />
     <file src="NuGet\content\*.*" target="content" />
     <file src="$OutDir$Infragistics4.Shared.v16.2.dll" target="lib\net46" />
     <file src="$OutDir$Infragistics4.Win.Misc.v16.2.dll" target="lib\net46" />

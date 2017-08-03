@@ -7,7 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Threading;
 using Infragistics.Win.UltraWinGrid;
+using System.Diagnostics;
+using Infragistics.Win;
 
 namespace NLogViewer
 {
@@ -17,6 +20,7 @@ namespace NLogViewer
         /// LogEntiesBind - collection of LogeventViewModel objects.
         /// </summary>
         public IBindingList LogEntiesBind { get; private set; }
+        Timer ClipboardTimer = new Timer();
 
         /// <summary>
         /// IsTargetConfigured 
@@ -61,19 +65,35 @@ namespace NLogViewer
             LogEntiesBind = new BindingList<LogEventViewModel>();
 
             InitializeComponent();
+            Debug.WriteLine("NLogViewer - constractor");
+            ClipboardTimer.Interval = 30000;
+            ClipboardTimer.Tick += ClipboardTimer_Tick;
+            ClipboardTimer.Start();
         }
+
+        private void ClipboardTimer_Tick(object sender, EventArgs e)
+        {
+            ClipboardTimer.Stop();
+            if (Clipboard.ContainsText())
+            {
+                Clipboard.Clear();
+            }
+        }
+
 
         private void NLogViewer_Load(object sender, EventArgs e)
         {
+            Debug.WriteLine("Load - DesignMode: " + DesignMode);
             if (DesignMode == false)
             {
                 foreach (NlogViewerTarget target in NLog.LogManager.Configuration.AllTargets.Where(t => t is NlogViewerTarget).Cast<NlogViewerTarget>())
                 {
                     IsTargetConfigured = true;
                     target.LogReceived += LogReceived;
+                    Debug.WriteLine("Load - target.Name" + target.Name);
                 }
             }
-
+            Debug.WriteLine("Load - LogEntiesBind.Count: " + LogEntiesBind.Count);
             this.ugrLogEntries.DataSource = LogEntiesBind;
             FormatLogEntriesGrid();
         }
@@ -81,6 +101,7 @@ namespace NLogViewer
         protected void LogReceived(NLog.Common.AsyncLogEventInfo log)
         {
             LogEventViewModel vm = new LogEventViewModel(log.LogEvent);
+            Debug.WriteLine("LogReceived: " + vm.LoggerName);
             if (IsHandleCreated)
             {
                 this.BeginInvoke(new Action(() =>
@@ -91,6 +112,7 @@ namespace NLogViewer
                             LogEntiesBind.RemoveAt(0);
 
                         LogEntiesBind.Add(vm);
+                        lblTotalEntries.Text = LogEntiesBind.Count.ToString();
                     }
                 }));
             }
@@ -109,7 +131,9 @@ namespace NLogViewer
             VisibleColumns.Add("Exception");
             SetAllGridColumnVisibility(this.ugrLogEntries, VisibleColumns);
             ugrLogEntries.DisplayLayout.Override.CellClickAction = CellClickAction.RowSelect;
+            Debug.WriteLine("Grid formatted");
         }
+
         /// <summary>
         /// SetAllGridColumnVisibility
         /// </summary>
@@ -167,6 +191,45 @@ namespace NLogViewer
             }
         }
         #endregion
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            LogEntiesBind.Clear();
+            lblTotalEntries.Text = LogEntiesBind.Count.ToString();
+        }
+
+        private void ugrLogEntries_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                UIElement el = ugrLogEntries.DisplayLayout.UIElement.ElementFromPoint(e.Location);
+                UltraGridCell cell = GetCell(el);// Get cell from point coordinates
+                if (cell != null)//if there is a cell
+                {
+                    object value = cell.Value;// get cell vale
+                    //cell.Value = value;// set cell value
+                    if ((value != null) && (string.IsNullOrEmpty(value.ToString()) == false))
+                    {
+                        string msg = string.Format("Following data will be copied to the clipboard{0} and will be cleared in 30 seconds:{0}{1}", Environment.NewLine, value.ToString());
+                        if (MessageBox.Show(msg, "Data copied to clipboard", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                        {
+                            Clipboard.SetText(value.ToString());
+                            ClipboardTimer.Start();
+                        }
+                    }
+                }
+            }
+        }
+
+        private UltraGridCell GetCell(UIElement element)
+        {
+            if (element == null || element.Parent == null)
+                return null;
+            if (element.Parent is CellUIElement)
+                return ((CellUIElement)element.Parent).Cell;
+            else
+                return GetCell(element.Parent);
+        }
     }
-    
+
 }

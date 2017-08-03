@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="Infragistics4.Shared.v16.2, Version=16.2.20162.2084, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
     <Reference Include="Infragistics4.Win.Misc.v16.2, Version=16.2.20162.2084, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+    <Reference Include="Infragistics4.Win.UltraWinDataSource.v16.2, Version=16.2.20162.2084, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
     <Reference Include="Infragistics4.Win.UltraWinGrid.v16.2, Version=16.2.20162.2084, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
     <Reference Include="Infragistics4.Win.v16.2, Version=16.2.20162.2084, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
     <Reference Include="Microsoft.VisualBasic" />
@@ -52,6 +53,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LogEventViewModel.cs" />
@@ -68,11 +70,7 @@
     <Content Include="NuGet\content\NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="NLogViewer.nuspec" />
-    <None Include="NuGet\tools\Install.ps1" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +81,20 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if "$(ConfigurationName)" == "Release" (
+
+NuGet.exe pack "$(ProjectDir)Superion.NLogViewer.csproj" -Prop Configuration=Release
+
+)
+if "$(ConfigurationName)" == "Debug" (
+
+NuGet.exe pack "$(ProjectDir)Superion.NLogViewer.csproj" -Prop Configuration=Debug
+
+)
+
+</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
