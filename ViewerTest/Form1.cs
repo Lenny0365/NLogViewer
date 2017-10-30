@@ -26,10 +26,15 @@ namespace ViewerTest
             {
                 Logger console = NLog.LogManager.GetLogger("console");
                 Logger logControl = NLog.LogManager.GetLogger("Standard");
+                Logger MylogControl = NLog.LogManager.GetLogger("MyLog");
 
                 LogLevel level = LogLevel.Trace;
                 console.Log(level, "Test message to log");
                 console.Error("test errror");
+
+               
+                MylogControl.Log(level, "My Test message to log");
+                MylogControl.Error("My test errror");
 
                 logControl.Log(level, "Test message to logControl");
                 logControl.Error("test errror");

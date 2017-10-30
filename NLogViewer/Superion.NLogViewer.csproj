@@ -70,7 +70,9 @@
     <Content Include="NuGet\content\NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="NLogViewer.nuspec" />
+    <None Include="NLogViewer.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +96,9 @@ NuGet.exe pack "$(ProjectDir)Superion.NLogViewer.csproj" -Prop Configuration=Deb
 )
 
 </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>Del $(ProjectDir)$(OutDir)*.nupkg</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

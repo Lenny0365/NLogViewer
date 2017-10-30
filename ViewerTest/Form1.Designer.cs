@@ -39,10 +39,9 @@
             // btnTest
             // 
             this.btnTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTest.Location = new System.Drawing.Point(509, 11);
-            this.btnTest.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnTest.Location = new System.Drawing.Point(382, 9);
             this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(100, 28);
+            this.btnTest.Size = new System.Drawing.Size(75, 23);
             this.btnTest.TabIndex = 1;
             this.btnTest.Text = "&Test";
             this.btnTest.UseVisualStyleBackColor = true;
@@ -56,11 +55,11 @@
             this.nLogViewer1.Location = new System.Drawing.Point(0, 0);
             this.nLogViewer1.LoggerName = "Standard";
             this.nLogViewer1.LoggerNameWidth = 0D;
-            this.nLogViewer1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.nLogViewer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nLogViewer1.MessageWidth = 0D;
             this.nLogViewer1.Name = "nLogViewer1";
             this.nLogViewer1.NumberOfEntries = 70;
-            this.nLogViewer1.Size = new System.Drawing.Size(622, 499);
+            this.nLogViewer1.Size = new System.Drawing.Size(466, 406);
             this.nLogViewer1.TabIndex = 2;
             this.nLogViewer1.TimeWidth = 0D;
             // 
@@ -68,9 +67,10 @@
             // 
             this.panel1.Controls.Add(this.btnTest);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 499);
+            this.panel1.Location = new System.Drawing.Point(0, 406);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(622, 52);
+            this.panel1.Size = new System.Drawing.Size(466, 42);
             this.panel1.TabIndex = 3;
             // 
             // plUserControl
@@ -78,18 +78,18 @@
             this.plUserControl.Controls.Add(this.nLogViewer1);
             this.plUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.plUserControl.Location = new System.Drawing.Point(0, 0);
+            this.plUserControl.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.plUserControl.Name = "plUserControl";
-            this.plUserControl.Size = new System.Drawing.Size(622, 499);
+            this.plUserControl.Size = new System.Drawing.Size(466, 406);
             this.plUserControl.TabIndex = 4;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(622, 551);
+            this.ClientSize = new System.Drawing.Size(466, 448);
             this.Controls.Add(this.plUserControl);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);

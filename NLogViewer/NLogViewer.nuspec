@@ -11,7 +11,7 @@
     <description>$description$</description>
     <releaseNotes>Added functionality log based on logger name.</releaseNotes>
     <copyright>Copyright 2017</copyright>
-    <tags>NLog Wonidows Control</tags>
+    <tags>NLog Windows Control</tags>
     <dependencies>
       <dependency id="NLog" version="4.4.11" />
     </dependencies>

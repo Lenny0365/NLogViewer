@@ -98,6 +98,12 @@ namespace NLogViewer
             FormatLogEntriesGrid();
         }
 
+        /// <summary>
+        /// LogReceived
+        /// If LoggerName of the control is not set then we display entries form all loggers.
+        /// If LoggerName  of the control is set the we will dispaly entries only for this specific logger.
+        /// </summary>
+        /// <param name="log"></param>
         protected void LogReceived(NLog.Common.AsyncLogEventInfo log)
         {
             LogEventViewModel vm = new LogEventViewModel(log.LogEvent);
@@ -106,7 +112,7 @@ namespace NLogViewer
             {
                 this.BeginInvoke(new Action(() =>
                 {
-                    if (this.LoggerName == vm.LoggerName)
+                    if ((string.IsNullOrEmpty(this.LoggerName) == true) || (this.LoggerName == vm.LoggerName))
                     {
                         if (LogEntiesBind.Count >= NumberOfEntries)
                             LogEntiesBind.RemoveAt(0);
